@@ -1,12 +1,47 @@
-GET http://localhost:3000/
-Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
-
 
 ###
-POST http://localhost:3000/
+POST http://localhost:3000/movies
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "age": 30
+  "title": "La vide de brian",
+  "year": 1997,
+  "director": "los los cohen",
+  "genre": "Comedy",
+  "rating": 7.8
 }
+
+GET http://localhost:3000/movies
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+
+###
+GET http://localhost:3000/movies/32552867-4d57-43f4-8788-406f336431cd
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+
+###
+PUT http://localhost:3000/movies/32552867-4d57-43f4-8788-406f336431cd
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+Content-Type: application/json
+
+{
+  "title": "Airbag",
+  "year": 1997,
+  "director": "Ulloa",
+  "rating": 7.8
+}
+
+###
+PATCH http://localhost:3000/movies/32552867-4d57-43f4-8788-406f336431cd
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+Content-Type: application/json
+
+{
+  "genre": "Comedy",
+  "rating": 9.7
+
+}
+
+###
+DELETE http://localhost:3000/movies/32552867-4d57-43f4-8788-406f336431cd
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
