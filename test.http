@@ -1,0 +1,12 @@
+GET http://localhost:3000/
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "age": 30
+}
