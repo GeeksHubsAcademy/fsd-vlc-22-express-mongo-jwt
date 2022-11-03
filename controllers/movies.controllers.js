@@ -1,14 +1,13 @@
 
 const MovieModel = require("../models/movie.model.js");
-const {movieFindOne} = require("../services/movies.services.js")
-
-
+const { movieFindOne } = require("../services/movies.services.js")
 
 const moviesGetAllController = async (req, res) => {
   const queryParameters = req.query || {};
   const movies = await MovieModel.find(queryParameters);
   res.json(movies);
 };
+
 
 const moviesGetOneController = async (req, res) => {
   const { id } = req.params;

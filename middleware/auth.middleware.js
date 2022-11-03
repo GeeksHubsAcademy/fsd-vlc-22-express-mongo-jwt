@@ -1,4 +1,7 @@
-const authMiddleware = (req, res, next) => {
+const {isValidUserAndPassword} = require('../services/auth.service.js');
+
+
+const authBasicMiddleware = async (req, res, next) => {
   const { authorization } = req.headers;
   let isAuthorized = false;
   const [type, token] = authorization.split(" ");
@@ -8,9 +11,11 @@ const authMiddleware = (req, res, next) => {
   }
   const userAndPass = atob(token);
   const [user, pass] = userAndPass.split(":");
-  if (user === "Alladin" && pass === "open sesame") {
+
+  if (await isValidUserAndPassword(user, pass)) {
     isAuthorized = true;
   }
+
   if (isAuthorized) {
     next();
   } else {
@@ -18,4 +23,4 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = authBasicMiddleware;

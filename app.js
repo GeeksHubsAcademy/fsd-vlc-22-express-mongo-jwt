@@ -1,8 +1,8 @@
 const express = require("express");
-const authMiddleware = require('./middleware/auth.middleware.js');
+const authBasicMiddleware = require('./middleware/auth.middleware.js');
 const logMiddleware = require('./middleware/log.middleware.js');
 const moviesRouter = require("./routers/movies.router.js");
-
+const authRouter = require("./routers/auth.router.js");
 
 const app = express();
 
@@ -10,7 +10,8 @@ app.use(express.json());
 
 app.use(logMiddleware);
 
-app.use("/movies", authMiddleware, moviesRouter);
+app.use("/auth", authRouter);
+app.use("/movies", authBasicMiddleware, moviesRouter);
 
 
 app.use((req, res) =>res.status(404).json({ message: "Not found url -> " + req.url }));

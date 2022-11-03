@@ -8,7 +8,7 @@ const {
     moviesDeleteController,
     moviesPutController,
     moviesPatchController,
-} = require("./controllers/movies.controllers.js");
+} = require("../controllers/movies.controllers.js");
 
 moviesRouter.get("/", moviesGetAllController);
 moviesRouter.get("/:id", moviesGetOneController);
