@@ -12,8 +12,14 @@ Content-Type: application/json
   "rating": 7.8
 }
 
+###
 GET http://localhost:3000/movies
 Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+###
+
+GET http://localhost:3000/movies?title=La vide de brian
+Authorization: basic QWxsYWRpbjpvcGVuIHNlc2FtZQ==
+
 
 ###
 GET http://localhost:3000/movies/32552867-4d57-43f4-8788-406f336431cd
