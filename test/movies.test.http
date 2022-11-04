@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/movies
-Authorization: basic anVhbi5nYXJuaWNhKzFAaG9sYS5jb206MTIzNDU2YUE=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZDAwZjcxZDktYThiMC00NGNjLThlNTMtOWY3MDk4YzE3ZGMwIiwiZW1haWwiOiJqdWFuLmdhcm5pY2ErMUBob2xhLmNvbSIsImNyZWF0ZWQiOjE2Njc1NjA2ODcwNDYsImlhdCI6MTY2NzU2MDY4N30.sbjaikrByvyfcYoGpShUYx6B87MO5JuSRbSQazsAshg
 
 ###
 

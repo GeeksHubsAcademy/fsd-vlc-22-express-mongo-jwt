@@ -29,16 +29,49 @@ const authBearerMiddleware = async (req, res, next) => {
   const [strategy, jwt] = authorization.split(" ");
   try {
     if (strategy.toLowerCase() !== "bearer") {
-
       throw new Error("Invalid strategy");
     }
-    jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
+    const payload = jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
+
+    const created = payload.created;
+
+    const timeElapsed = Date.now() - created;
+    const MAX_TIME = Number(process.env.MAX_TIME_JWT_CADUCITY) ||
+      1000 * 60 * 60 * 24 * 30; // 30 days
+    const isValid = timeElapsed && created && MAX_TIME &&
+      (timeElapsed < MAX_TIME);
+
+    if (!isValid) {
+      throw new Error("Token expired");
+    }
+
+    // expose the payload to the next middlewares and controllers
+    req.auth = payload;
+    next();
+
   } catch (error) {
     res.status(401).json({ message: "You are not authenticated" });
     return;
   }
 
-  next();
 };
 
-module.exports = { authBasicMiddleware, authBearerMiddleware };
+
+const isValidRoleAdmin =  (req, res, next) => {
+  if (req.auth?.role === 'admin') {
+    next();
+  } else {
+    res.status(403).json({ message: "You are not authorized" });
+  }
+}
+
+
+const isValidRole = (role)  =>  (req, res, next) => {
+  if (req.auth?.role === role) {
+    next();
+  } else {
+    res.status(403).json({ message: "You are not authorized" });
+  }
+}
+
+module.exports = { authBasicMiddleware, authBearerMiddleware,isValidRoleAdmin , isValidRole};

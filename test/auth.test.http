@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
   "password": "123456aA",
-  "email": "juan.garnica+1@hola.com",
+  "email": "juan@geekshubs.com",
   "uuid":"upss te la colé"
 }
 ###
@@ -14,7 +14,10 @@ Content-Type: application/json
 
 {
   "password": "123456aA",
-  "email": "juan.garnica+1@hola.com"
+  "email": "juan@geekshubs.com"
 }
 
 ###
+
+GET http://localhost:3000/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOGM4YTljYTItNDg1NC00N2UyLWExN2YtNmE4MThlNDk5NWU0IiwiZW1haWwiOiJqdWFuQGdlZWtzaHVicy5jb20iLCJjcmVhdGVkIjoxNjY3NTYyMDUyMDAyLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzU2MjA1Mn0.nE7_PAzHUviXvG7uKmG5xG2bGplLz7T3tb7jqadJWHM

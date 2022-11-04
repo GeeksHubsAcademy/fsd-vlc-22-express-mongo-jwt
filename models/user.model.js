@@ -13,6 +13,10 @@ const userSchema =  {
       required: true,
 
     },
+    role: {
+      type: String,
+      default: "user",
+    },
 
     uuid: {
       type: String,

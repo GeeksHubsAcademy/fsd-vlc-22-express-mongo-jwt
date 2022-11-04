@@ -31,6 +31,7 @@ async function assertEmailIsUniqueService(email) {
 
 async function createUserService(userBody) {
   delete userBody.uuid;
+  delete userBody.role;
   const hash = encryptPassword(userBody.password);
   userBody.password = hash;
   const user = new UserModel(userBody);
