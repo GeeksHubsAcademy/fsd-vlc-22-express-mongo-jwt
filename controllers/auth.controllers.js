@@ -1,12 +1,42 @@
+const UserModel = require("../models/user.model.js");
 const {
   assertValidPasswordService,
   assertEmailIsUniqueService,
   assertEmailIsValid,
   createUserService,
+  encryptPassword,
 } = require("../services/auth.service.js");
 
+const jsonwebtoken = require("jsonwebtoken");
+
 async function authLoginController(req, res) {
-  res.json({ message: "Login" });
+  const { email, password } = req.body;
+  const userFound = await UserModel.findOne({ email: email });
+  if (!userFound) {
+    res.status(401).json({ message: "Password or email is incorrect" });
+    return;
+  }
+  const hashedPassword = encryptPassword(password);
+  if (hashedPassword !== userFound.password) {
+    res.status(401).json({ message: "Password or email is incorrect" });
+    return;
+  }
+
+  const secret = process.env.JWT_SECRET || '';
+
+  if (secret.length < 10) {
+    throw new Error("JWT_SECRET is not set");
+  }
+
+  const jwt = jsonwebtoken.sign({
+    uuid: userFound.uuid,
+    email: userFound.email,
+  }, secret);
+
+  res.status(200).json({
+    message: "Login successful",
+    jwt: jwt,
+  });
 }
 
 async function authRegisterController(req, res) {
@@ -43,7 +73,6 @@ async function authRegisterController(req, res) {
     delete userCreated.password;
     delete userCreated._id;
     res.status(201).json(userCreated);
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

@@ -1,5 +1,5 @@
-const {isValidUserAndPassword} = require('../services/auth.service.js');
-
+const { isValidUserAndPassword } = require("../services/auth.service.js");
+const jsonwebtoken = require("jsonwebtoken");
 
 const authBasicMiddleware = async (req, res, next) => {
   const { authorization } = req.headers;
@@ -23,4 +23,22 @@ const authBasicMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authBasicMiddleware;
+const authBearerMiddleware = async (req, res, next) => {
+  const { authorization } = req.headers;
+  // 'Bearer 1234'.split(' ') -> ['Bearer','1234']
+  const [strategy, jwt] = authorization.split(" ");
+  try {
+    if (strategy.toLowerCase() !== "bearer") {
+
+      throw new Error("Invalid strategy");
+    }
+    jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
+  } catch (error) {
+    res.status(401).json({ message: "You are not authenticated" });
+    return;
+  }
+
+  next();
+};
+
+module.exports = { authBasicMiddleware, authBearerMiddleware };

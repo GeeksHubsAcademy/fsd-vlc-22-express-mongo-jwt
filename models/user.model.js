@@ -1,7 +1,6 @@
 
 const crypto = require("node:crypto");
 const mongoose = require("../config/mongoose.config.js");
-const { assertEmailIsValid } = require("../services/auth.service.js");
 
 const userSchema =  {
     email: {

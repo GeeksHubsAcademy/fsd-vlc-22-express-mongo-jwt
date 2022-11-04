@@ -15,6 +15,14 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/movies
 Authorization: basic anVhbi5nYXJuaWNhKzFAaG9sYS5jb206MTIzNDU2YUE=
+
+###
+
+GET http://localhost:3000/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZDAwZjcxZDktYThiMC00NGNjLThlNTMtOWY3MDk4YzE3ZGMwIiwiZW1haWwiOiJqdWFuLmdhcm5pY2ErMUBob2xhLmNvbSIsImlhdCI6MTY2NzU1NTc0M30.xgTSwrJvjF2QMg1bKH-xlDOak4P7XI9YT5dU3fMi8qg
+
+
+
 ###
 
 GET http://localhost:3000/movies?title=La vide de brian

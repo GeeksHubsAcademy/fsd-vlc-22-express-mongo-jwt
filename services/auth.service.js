@@ -28,13 +28,6 @@ async function assertEmailIsUniqueService(email) {
 }
 
 
-function encryptPassword(password) {
-  const hash = crypto
-    .createHmac("sha512", 'no salt for now // TODO: REALLY NEED TO ADD SALT?')
-    .update(password)
-    .digest("base64");
-  return hash;
-}
 
 async function createUserService(userBody) {
   delete userBody.uuid;
@@ -56,6 +49,14 @@ function assertEmailIsValid(email) {
   }
 }
 
+function encryptPassword(password) {
+  const hash = crypto
+    .createHmac("sha512", 'no salt for now // TODO: REALLY NEED TO ADD SALT?')
+    .update(password)
+    .digest("base64");
+  return hash;
+}
+
 async function isValidUserAndPassword(user, pass) {
   const userFound = await UserModel.findOne({ email: user });
   if (userFound) {
@@ -71,4 +72,5 @@ module.exports = {
   assertEmailIsValid,
   createUserService,
   isValidUserAndPassword,
+  encryptPassword,
 };
